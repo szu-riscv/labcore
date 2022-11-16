@@ -6,6 +6,7 @@
 out/
 project/
 target/
+build/
 # chiseltest out
 test_run_dir/
 

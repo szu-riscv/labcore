@@ -16,7 +16,7 @@ TIMELOG = $(BUILD_DIR)/time.log
 $(SIM_TOP_V): $(SCALA_FILE)
 	mkdir -p $(@D)
 	@echo "\n[mill] Generating Verilog files..." > $(TIMELOG)
-	mill ChiselDemo.runMain $(MillTarget) -td $(@D)
+	mill -i ChiselDemo.runMain $(MillTarget) -td $(@D)
 
 sim-verilog: $(SIM_TOP_V)
 default: sim-verilog
@@ -34,4 +34,10 @@ clean:
 	$(MAKE) -C ./difftest clean
 	rm -rf ./build
 
-.PHONY: emu emu-run sim-verilog clean emu-clean
+init:
+	git submodule update --init
+
+idea:
+	mill -i mill.scalalib.GenIdea/idea
+
+.PHONY: emu emu-run sim-verilog clean emu-clean init idea
